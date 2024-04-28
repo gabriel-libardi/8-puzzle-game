@@ -196,7 +196,6 @@ def main():
         print(solution)
         print(len(solution))
         root = tk.Tk()
-        root.geometry('1920x1080')
         gui = EightPuzzleGUI(root, start_state, goal_state, solution)
         root.after(10, gui.solve_puzzle)
         root.mainloop()
