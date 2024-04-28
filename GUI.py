@@ -154,8 +154,8 @@ class EightPuzzleGUI:
                     font_color = "blue"
                     self.tiles[i][j].config(text=str(new_state[i][j]), bg=bg_color, fg=font_color)
                 else:
-                    bg_color = "dark blue"
-                    font_color = "dark blue"
+                    bg_color = "white"
+                    font_color = "white"
                     self.tiles[i][j].config(text="", bg=bg_color, fg=font_color)
                 self.tiles[i][j].update()
 
