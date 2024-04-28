@@ -141,7 +141,7 @@ class EightPuzzleGUI:
                     tile_font = ("Arial", 2, 'bold')
 
                 self.tiles[i][j] = tk.Label(
-                    self.frame, text=str(self.start_state[i][j]), font=("Arial", 24, "bold"), width=40, height=20,
+                    self.frame, text=str(self.start_state[i][j]), font=("Arial", 24, "bold"), width=18, height=9,
                     bg=bg_color, fg=font_color, borderwidth=2, relief="solid",
                 )
                 self.tiles[i][j].grid(row=i, column=j, padx=3, pady=3)
@@ -196,6 +196,7 @@ def main():
         print(solution)
         print(len(solution))
         root = tk.Tk()
+        root.geometry('1920x1080')
         gui = EightPuzzleGUI(root, start_state, goal_state, solution)
         root.after(10, gui.solve_puzzle)
         root.mainloop()
