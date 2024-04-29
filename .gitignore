@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+
+# And specially our test executable
+build/puzzle
