@@ -42,14 +42,12 @@ int** swap_void_matrix(Node no, int posi_x, int posi_y, int sum_x, int sum_y){
 }
 
 void sons(List* li, Node no, int profundidade){
-    int posi_void_x, posi_void_y, void_position;
+    int posi_void_x, posi_void_y;
     for (int i = 0; i < N; i++){
         for (int j = 0; j < N; j++){
             if((no.matrix[i][j]) == 0){
                 posi_void_x = i;
                 posi_void_y = j;
-
-                void_position = ((i * 3) + j);
             }
         }
     }

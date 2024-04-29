@@ -1,11 +1,17 @@
 #include "header.h"
-#include "list.c"
-#include "auxiliar.c"
 
 int main(){
 
     int **matrix;
     alloc_matrix(&matrix);
+
+    /*
+    for(int i = 0; i < N; i++){
+        for(int j = 0; j < N; j++){
+            matrix[i][j] = j + (i)*3;
+        }
+    }
+    */
 
    matrix[0][0] = 2;
    matrix[0][1] = 8;
