@@ -9,8 +9,8 @@ EXECUTABLE ?= build/puzzle
 SHARED_LIB  = build/graph_search.so
 
 ZIPFILE    ?= ./zipfile.zip
-CFILES      = $(wildcard ./A_star/*.c)
-OFILES      = $(patsubst A_star/%.c, objs/%.o, $(CFILES))
+CFILES      = $(wildcard ./**/*.c)
+OFILES      = $(patsubst **/%.c, objs/%.o, $(CFILES))
 
 .PHONY: all clean zip run test debug
 
