@@ -2,10 +2,11 @@ CC ?= gcc
 ZIP ?= zip
 
 CFLAGS += -Wall -Wextra -Wpedantic -Iinclude/
-LDFLAGS += 
+LDFLAGS += -shared -fPIC
 VDFLAGS += --leak-check=full --show-leak-kinds=all -s
 
 EXECUTABLE ?= build/puzzle
+SHARED_LIB  = build/graph_search.so
 
 ZIPFILE    ?= ./zipfile.zip
 CFILES      = $(wildcard ./A_star/*.c)
@@ -13,7 +14,8 @@ OFILES      = $(patsubst A_star/%.c, objs/%.o, $(CFILES))
 
 .PHONY: all clean zip run test debug
 
-all: $(EXECUTABLE)
+test: $(EXECUTABLE)
+all:  $(SHARED_LIB)
 
 objs/%.o: A_star/%.c
 	@mkdir -p build
@@ -35,6 +37,10 @@ debug: clean
 debug: $(EXECUTABLE)
 
 $(EXECUTABLE): $(OFILES)
+	@mkdir -p build
+	$(CC) $(CFLAGS) -o $@ $^
+
+$(SHARED_LIB): $(OFILES)
 	@mkdir -p build
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
