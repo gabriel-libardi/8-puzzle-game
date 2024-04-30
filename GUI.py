@@ -154,11 +154,8 @@ class EightPuzzleGUI:
                 else:
                     curr_img = self.black_img
 
-                self.tiles[i][j] = tk.Label(self.frame, width=90, height=90, relief="solid", image=curr_img)
+                self.tiles[i][j] = tk.Label(self.frame, width=100, height=100, relief="solid", image=curr_img)
                 self.tiles[i][j].grid(row=i, column=j, padx=3, pady=3)
-
-        advanceButton = tk.Button(self.frame, text="Avançar", width=10, height=2)
-        advanceButton.grid(row=1, column=4, padx=3, pady=3)
 
     def update_board(self, new_state):
         for i in range(len(new_state)):
@@ -199,9 +196,6 @@ class EightPuzzleGUI:
             clean()
             self.move_tile(self.solution[c])
 
-        #for move in self.solution:
-                #self.move_tile(move)
-
 
 def main():
     start_state = [[8, 6, 7],
@@ -210,8 +204,7 @@ def main():
 
     goal_state = [[1, 2, 3], [4, 5, 6], [7, 8, 0]]
 
-    solution_astar = False
-    #solution_astar = astar_search(start_state, goal_state)
+    solution_astar = astar_search(start_state, goal_state)
     solution_dfs = dfs_search(start_state, goal_state)
 
     if solution_dfs or solution_astar:
