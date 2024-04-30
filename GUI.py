@@ -213,9 +213,9 @@ def main():
         clean()
         root = tk.Tk()
         if game_mode == 1:
-            gui = EightPuzzleGUI(root, start_state, goal_state, solution_dfs)
-        elif game_mode == 2:
             gui = EightPuzzleGUI(root, start_state, goal_state, solution_astar)
+        elif game_mode == 2:
+            gui = EightPuzzleGUI(root, start_state, goal_state, solution_dfs)
         root.after(10, gui.solve_puzzle)
         root.mainloop()
     else:
