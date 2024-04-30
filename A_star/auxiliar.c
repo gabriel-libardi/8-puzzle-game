@@ -5,7 +5,7 @@ int hn(int **matrix){
 
     for(int i = 0; i < N; i++){
         for(int j = 0; j < N; j++){
-            if ((matrix[i][j] != goal_matrix[i][j]) && (matrix[i][j] != 0)){
+            if((matrix[i][j] != goal_matrix[i][j]) && (matrix[i][j] != 0)){
                 value++;
             }
         }
@@ -22,14 +22,24 @@ void alloc_matrix(int ***matrix){
     }
 }
 
+void free_matrix(int ***matrix) {
+    if (*matrix != NULL) {
+        for (int i = 0; i < N; ++i) {
+            free((*matrix)[i]);
+        }
+        free(*matrix);
+        *matrix = NULL;
+    }
+}
+
 int** swap_void_matrix(Node no, int posi_x, int posi_y, int sum_x, int sum_y){
     int** new_matrix;
     alloc_matrix(&(new_matrix));
 
     for(int i = 0; i < N; i++){
-            for(int j = 0; j < N; j++){
-                new_matrix[i][j] = no.matrix[i][j];
-            }
+        for(int j = 0; j < N; j++){
+            new_matrix[i][j] = no.matrix[i][j];
+        }
     }
     
     int aux;
@@ -52,39 +62,51 @@ void sons(List* li, Node no, int profundidade){
         }
     }
 
-    //NodeWay* father = create_way_list();
-    //copia_list_matrix(father, no->way);
-    //way_matrix();
-    Node teste, teste2, teste3, teste4;
+    Node teste;
+    int tam_string = (strlen(no.wa));
 
     if (posi_void_x > 0) {  // Mover para cima
-        teste.wa = clone_way_list_end(no.wa, 'w');
+        teste.wa = (char*)malloc(sizeof(char)*(tam_string + 1));
+        strcpy(teste.wa,no.wa);
+        teste.wa[tam_string] = 'w';
+
         teste.matrix = (swap_void_matrix(no,posi_void_x, posi_void_y, -1, 0));
         teste.hn = hn(teste.matrix);
         teste.ef = profundidade + teste.hn;
         insert_list_ordered(li,teste);
     }
+    
     if (posi_void_y > 0) {  // Mover para a esquerda
-        teste2.wa = clone_way_list_end(no.wa, 'a');
-        teste2.matrix = (swap_void_matrix(no,posi_void_x, posi_void_y, 0, -1));
-        teste2.hn = hn(teste2.matrix);
-        teste2.ef = profundidade + teste2.hn;
-        insert_list_ordered(li,teste2);
+        teste.wa = (char*)malloc(sizeof(char)*(tam_string + 1));
+        strcpy(teste.wa,no.wa);
+        teste.wa[tam_string] = 'a';
+
+        teste.matrix = (swap_void_matrix(no,posi_void_x, posi_void_y, 0, -1));
+        teste.hn = hn(teste.matrix);
+        teste.ef = profundidade + teste.hn;
+        insert_list_ordered(li,teste);
     }
     if (posi_void_x < N - 1) {  // Mover para baixo
-        teste3.wa = clone_way_list_end(no.wa, 's');
-        teste3.matrix = (swap_void_matrix(no,posi_void_x, posi_void_y, 1, 0));
-        teste3.hn = hn(teste3.matrix);
-        teste3.ef = profundidade + teste3.hn;
-        insert_list_ordered(li,teste3);
+        teste.wa = (char*)malloc(sizeof(char)*(tam_string + 1));
+        strcpy(teste.wa,no.wa);
+        teste.wa[tam_string] = 's';
+
+        teste.matrix = (swap_void_matrix(no,posi_void_x, posi_void_y, 1, 0));
+        teste.hn = hn(teste.matrix);
+        teste.ef = profundidade + teste.hn;
+        insert_list_ordered(li,teste);
     }
     if (posi_void_y < N - 1) {  // Mover para a direita
-        teste4.wa = clone_way_list_end(no.wa, 'd');
-        teste4.matrix = (swap_void_matrix(no,posi_void_x, posi_void_y, 0, 1));
-        teste4.hn = hn(teste4.matrix);
-        teste4.ef = profundidade + teste4.hn;
-        insert_list_ordered(li,teste4);
+        teste.wa = (char*)malloc(sizeof(char)*(tam_string + 1));
+        strcpy(teste.wa,no.wa);
+        teste.wa[tam_string] = 'd';
+
+        teste.matrix = (swap_void_matrix(no,posi_void_x, posi_void_y, 0, 1));
+        teste.hn = hn(teste.matrix);
+        teste.ef = profundidade + teste.hn;
+        insert_list_ordered(li,teste);
     }
+    //free(teste.wa);
 }
 
 int ja_foi(Node atual, List* li2){
@@ -120,7 +142,6 @@ int solve(List* li, List* li2){
         return ERROR;
     }
 
-
     Elem* no = *li;
     if(no->node.hn == 0){
             return OK;
@@ -145,13 +166,16 @@ int solve(List* li, List* li2){
             printf("ef(n) = %d + %d\n", ((no2->node.ef) - (no2->node.hn)), no2->node.hn);
             printf("ef(n) = %d\n",no2->node.ef);
             printf("\n");
-            //*/
-            //char a;
-            //scanf("%c", &a);
+
+            /*
+            char a;
+            if(scanf("%c", &a)){
+                a = 0;
+            }
+            */
             remove_list_ini(li);
             sons(li, no->node, (((no2->node.ef) - (no2->node.hn)) + 1));
             return (solve(li, li2));
         }
     }
 }
-
