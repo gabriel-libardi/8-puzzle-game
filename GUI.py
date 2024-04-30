@@ -186,7 +186,7 @@ class EightPuzzleGUI:
             if player_input == 2:
                 clean()
                 guess = input("A resposta do puzzle é: ")
-                if str(guess) == answer:
+                if str(guess).upper() == answer.upper():
                     clean()
                     print("Voce ganhou!")
                     return
