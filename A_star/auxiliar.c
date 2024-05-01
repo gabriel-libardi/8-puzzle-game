@@ -28,7 +28,6 @@ void free_matrix(int ***matrix) {
             free((*matrix)[i]);
         }
         free(*matrix);
-        *matrix = NULL;
     }
 }
 
@@ -136,6 +135,28 @@ int ja_foi(Node atual, List* li2){
 
     return 0;
 }
+
+
+char* solve_A_star(int** initial_position) {
+    Node node1;
+    node1.matrix = initial_position;
+    node1.hn = hn(node1.matrix);
+    node1.ef = node1.hn;
+    node1.wa = (char*)malloc(sizeof(char)*1); 
+
+    List* li = create_list();
+    insert_list_ordered(li, node1);
+    List* li2 = create_list();
+
+    solve(li, li2);
+
+    Elem *no = *li;
+    char* solution = malloc((no->node.ef + 1)*sizeof(char));
+    strcpy(solution, no->node.wa);
+
+    return solution;
+}
+
 
 int solve(List* li, List* li2){
     if((li == NULL) || (*li == NULL)){

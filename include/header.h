@@ -46,4 +46,7 @@ int remove_list_ini(List* li);
 void release_list(List* li);
 int insert_list_end(List* li, Node data);
 
+
+char* solve_A_star(int** initial_position);
+
 #endif
