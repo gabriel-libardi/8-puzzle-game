@@ -6,6 +6,7 @@ import os
 
 import numpy as np
 from PIL import Image, ImageTk
+from graph_search import *
 
 answer = "Mitocondria"
 
