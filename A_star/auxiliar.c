@@ -137,6 +137,23 @@ int ja_foi(Node atual, List* li2){
 }
 
 
+char* A_star(int initial_position[N*N]) {
+    int** matrix;
+    alloc_matrix(&matrix);
+
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            matrix[i][j] = initial_position[i*N + j];
+        }
+    }
+
+    char* solution = solve_A_star(matrix);
+    free_matrix(&matrix);
+
+    return solution;
+}
+
+
 char* solve_A_star(int** initial_position) {
     Node node1;
     node1.matrix = initial_position;
@@ -153,6 +170,8 @@ char* solve_A_star(int** initial_position) {
     Elem *no = *li;
     char* solution = malloc((no->node.ef + 1)*sizeof(char));
     strcpy(solution, no->node.wa);
+
+    printf("The solution is: %s\n", solution);
 
     return solution;
 }

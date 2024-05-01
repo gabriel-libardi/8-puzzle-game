@@ -198,11 +198,11 @@ class EightPuzzleGUI:
 
 
 def main():
-    start_state = [[8, 6, 7],
-                   [2, 5, 4],
-                   [3, 0, 1]]
+    start_state = [[2, 8, 3],
+                   [1, 6, 4],
+                   [7, 0, 5]]
 
-    goal_state = [[1, 2, 3], [4, 5, 6], [7, 8, 0]]
+    goal_state = [[1, 2, 3], [8, 0, 4], [7, 6, 5]]
 
     solution_astar = astar_search(start_state, goal_state)
     solution_dfs = dfs_search(start_state, goal_state)
